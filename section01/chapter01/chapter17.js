@@ -22,3 +22,7 @@ console.log(item1, item2);
   
 arrC[0] = "hello"; 
 console.log(arrC); 
+
+let array2 = new Array();
+array2.push(3,4,5,6,7,"안녕");
+console.log(array2);
