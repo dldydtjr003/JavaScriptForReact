@@ -31,3 +31,13 @@ let {
 let myAge2 = person.age;
 
 console.log(myAge, name, myHobby, extra);
+
+// 3. 함수(람다식 = 화살표 함수)
+// 각 멤버변수를 변수로 저장 시키고 출력
+let printPerson = ({name,age,hobby,extra = "hello"})=>{
+  console.log(`name = ${name}`);
+  console.log(`age = ${age+1}`);
+  console.log(`hobby = ${hobby}`);
+  console.log(`extra = ${extra}`);
+};
+printPerson(person);
