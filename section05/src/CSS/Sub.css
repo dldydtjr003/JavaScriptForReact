@@ -1,0 +1,38 @@
+/* 공통 스타일: 버튼처럼 보이게 구성 */
+.status-card {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+  border: none;
+}
+
+/* 로그인 상태: 신뢰감을 주는 푸른 계열 */
+.login {
+  background-color: #f0f7ff;
+  color: #007bff;
+  border: 1px solid #cce5ff;
+}
+
+.login:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px); /* 살짝 위로 떠오름 */
+}
+
+/* 로그아웃 상태: 주의를 환기하는 부드러운 옐로우/오렌지 계열 */
+.logout {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.logout:hover {
+  background-color: #ffc107;
+  color: #212529;
+  transform: translateY(-2px);
+}
