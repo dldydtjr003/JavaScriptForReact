@@ -1,0 +1,53 @@
+.List {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.searchbar {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #dfe6e9;
+  border-radius: 25px; /* 둥근 검색창 */
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.table_wrapper {
+  overflow-x: auto; /* 모바일 대응 */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f8f9fa;
+  color: #7f8c8d;
+  font-weight: 600;
+  padding: 15px;
+  border-bottom: 2px solid #edf2f7;
+}
+
+td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #f1f2f6;
+  color: #2d3436;
+}
+
+.delete_btn {
+  background-color: #ff7675;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete_btn:hover {
+  background-color: #d63031;
+}

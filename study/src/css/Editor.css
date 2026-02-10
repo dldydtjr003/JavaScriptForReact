@@ -1,0 +1,45 @@
+.Editor {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.Editor h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #34495e;
+}
+
+.input_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.input_wrapper input {
+  padding: 12px;
+  border: 1px solid #dfe6e9;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.input_wrapper input:focus {
+  border-color: #3498db;
+}
+
+.input_wrapper button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.input_wrapper button:hover {
+  background-color: #2980b9;
+}
