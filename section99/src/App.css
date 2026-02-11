@@ -1,0 +1,10 @@
+.App {
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid black;
+  width: 500px;
+}
+.InputController button{
+  margin: 5px;
+  padding: 5px 15px;
+}
