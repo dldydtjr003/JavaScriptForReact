@@ -3,7 +3,7 @@ import './css/App.css'
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
-import { useState, useRef, useReducer } from 'react'
+import { useState, useRef, useReducer, useCallback } from 'react'
 import Exam from './components/Exam'
 
 // 전역변수
@@ -55,7 +55,7 @@ function App() {
   const idRef = useRef(3);
 
   // 이벤트 함수 생성(setTodos 핸들러 함수)
-  const onCreate = (content)=>{
+  const onCreate = useCallback((content)=>{
     dispatch({
     type:"CREATE",
     data:{
@@ -65,21 +65,21 @@ function App() {
       date: new Date().getTime(), 
     }
     })
-  }
+  },[])
   // 이벤트 함수 생성(setTodos 수정)
-  const onUpdate = (id)=>{
+  const onUpdate = useCallback((id)=>{
     dispatch({
     type:"UPDATE",
     id:id
     })
-  }
+  },[])
   // 이벤트 함수 생성(setTodos 삭제)
-  const onDelete = (id)=>{
+  const onDelete = useCallback((id)=>{
     dispatch({
       type:"DELETE",
       id:id
     })
-  }
+  },[])
   return (
     <>
     <div className="App">
