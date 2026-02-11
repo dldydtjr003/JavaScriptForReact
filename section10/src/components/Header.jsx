@@ -1,7 +1,8 @@
 import '../css/Header.css'
+import { memo } from 'react';
 
-const Header = ()=>{
-
+const Header = ({count})=>{
+  console.log(`Header ${count}`);
   return <>
   <div className="Header">
     <h3>오늘의 달력📆</h3>
@@ -10,4 +11,4 @@ const Header = ()=>{
     
   </>
 }
-export default Header;
+export default memo(Header);

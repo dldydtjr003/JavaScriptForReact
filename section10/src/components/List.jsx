@@ -11,7 +11,6 @@ const List = ({todos, onUpdate, onDelete})=>{
   }
   // 전체 리스트 갯수, 완료 갯수, 미완료 갯수
   const { totalCount, doneCount, notDoneCount } = useMemo(()=>{
-    console.log("전체갯수");
     let totalCount = todos.length;
     let doneCount = todos.filter((todo)=>todo.isDone === true).length
     let notDoneCount = totalCount - doneCount;

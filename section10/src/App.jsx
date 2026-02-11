@@ -50,6 +50,7 @@ function reducer(data, action) {
 
 function App() {
   //const[todos, setTodos] = useState(mockData);
+  const [count, setCount] = useState(10);
   const[todos,dispatch] = useReducer(reducer,mockData);
   const idRef = useRef(3);
 
@@ -82,7 +83,7 @@ function App() {
   return (
     <>
     <div className="App">
-      <Header />
+      <Header count ={count}/>
       <Exam />
       <Editor onCreate = {onCreate}/>
       <List todos = {todos} onUpdate = {onUpdate} onDelete ={onDelete}/>
