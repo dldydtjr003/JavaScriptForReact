@@ -38,11 +38,21 @@ function App() {
       return todo.name !== targetName;
     }))
   }
-const onUpdate = (name) => {
-  const newKor = prompt('');
-
+const onUpdate = (name,kor,eng,math) => {
   setTodos(todos.map((todo) => {
-    return todo.name === name ? { ...todo, kor: Number(newKor) } : todo
+    if(todo.name === name){
+      const total = Number(kor) + Number(eng)+ Number(math);
+      const avg = total/3;
+      return {
+        ...todo,
+        kor :Number(kor),
+        eng :Number(eng),
+        math :Number(math),
+        total,
+        avg
+      }
+    }
+    return todo;
 }));
 };
 
