@@ -2,7 +2,7 @@ import './css/App.css'
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 const mockData =[
   {
@@ -19,7 +19,7 @@ function App() {
   const[todos,setTodos] = useState(mockData);
 
   const onCreate = (name, kor, eng, math) => {
-    const total = Number(kor) + Number(eng) + Number(math);
+    const total = parseInt(kor) + parseInt(eng) + parseInt(math);
     const avg = (total / 3).toFixed(1);
 
     const newTodo = {
