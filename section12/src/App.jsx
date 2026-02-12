@@ -1,4 +1,6 @@
-import { Route, Routes, Link, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { Route, Routes} from 'react-router-dom'
+import { useReducer, useRef, createContext } from 'react';
 import './App.css'
 import Home from './components/Home'
 import New from './components/New'
@@ -6,29 +8,95 @@ import Diary from './components/Diary'
 import Edit from './components/Edit'
 import NotFound from './components/NotFound'
 
+// 가상데이터
+const mockData = [ 
+  { 
+    id: 1, 
+    createdDate: new Date().getTime(), 
+    emotionId: 1, 
+    content: "1번 일기 내용", 
+  }, 
+  { 
+    id: 2, 
+    createdDate: new Date().getTime(), 
+    emotionId: 2,
+    content: "2번 일기 내용", 
+  }, 
+  { 
+    id: 3, 
+    createdDate: new Date(2026,1,1).getTime(), 
+    emotionId: 3,
+    content: "3번 일기 내용", 
+  }, 
+]; 
+
+// useReducer
+function reducer(state, action){
+  switch (action.type) {
+    case "CREATE":
+      return [action.data, ...state];
+      
+    case "UPDATE":
+      return state.map((item)=>
+        item.id === action.id ? action.data : item
+      )
+      
+    case "DELETE":
+      return state.filter((item)=>
+        item.id !== action.id
+      )
+  
+    default:
+      return state
+  }
+};
+
+  // props 내용을 공동으로 공유할 장소설정
+  export const DiaryStateContext = createContext();
+  export const DiaryDispatchContext = createContext();
+
 function App() {
 
-  const nav = useNavigate();
-  const onClickGoPage = (e)=>{
-    nav(`/${e.target.value}`)
+  const [state, dispatch] = useReducer(reducer, mockData);
+  const idRef = useRef(4);
+  // 이벤트 처리 onCreate, onUpdate, onDelete
+  const onCreate=(createdDate, emotionId, content)=>{
+    const newItem = {
+      id: idRef.current++,
+      createdDate,
+      emotionId,
+      content
+    }
+    dispatch({type:"CREATE", data:newItem})
   }
+
+  const onUpdate = (id, createdDate, emotionId, content)=>{
+    const newItem = {
+      id,
+      createdDate,
+      emotionId,
+      content
+    }
+    dispatch({type:"UPDATE", data:newItem})
+  }
+
+  const onDelete = (id)=>{
+    dispatch({type:"DELETE", id})
+  }
+
   return (
     <>
-    {/* 여기에 적은 내용은 모든 페이지에 공통 사용 */}
-    <h2><Link to={"/"}>Home</Link> || <Link to={"new"}>New</Link> || <Link to={"diary"}>Diary</Link> || <Link to={"edit"}>Edit</Link></h2>
-    <h2><a href="/">Home</a> || <a href="/new">New</a> || <a href="/diary">Diary</a> || <a href="/edit">Edit</a></h2>
-    <button onClick={onClickGoPage} value="">Home</button>
-    <button onClick={onClickGoPage} value="new">New</button>
-    <button onClick={onClickGoPage} value="diary">Diary</button>
-    <button onClick={onClickGoPage} value="edit">Edit</button>
+    <DiaryStateContext.Provider value={state}>
+      <DiaryDispatchContext.Provider value={{onCreate,onUpdate,onDelete}}>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/new' element={<New/>}/>
-        <Route path='/diary' element={<Diary/>}/>
-        <Route path='/edit' element={<Edit/>}/>
+        <Route path='/diary/:id' element={<Diary/>}/>
+        <Route path='/edit/:id' element={<Edit/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
-      
+      </DiaryDispatchContext.Provider>
+    </DiaryStateContext.Provider>
     </>
   )
 }
