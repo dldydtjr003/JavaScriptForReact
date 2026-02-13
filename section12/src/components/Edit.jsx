@@ -19,7 +19,7 @@ const Edit = ()=>{
 
   // 데이터 확인 및 리다이렉트 로직
   useEffect(() => {
-    if (data.length > 0 && !curDiaryItem) {
+    if (data.length < 0 && !curDiaryItem) {
       window.alert("존재하지 않는 일기입니다.");
       nav("/", { replace: true });
     }
