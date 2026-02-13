@@ -60,7 +60,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(4);
   // 이벤트 처리 onCreate, onUpdate, onDelete
-  const onCreate=(createdDate, emotionId, content)=>{
+  const onCreated=(createdDate, emotionId, content)=>{
     const newItem = {
       id: idRef.current++,
       createdDate,
@@ -87,7 +87,7 @@ function App() {
   return (
     <>
     <DiaryStateContext.Provider value={state}>
-      <DiaryDispatchContext.Provider value={{onCreate,onUpdate,onDelete}}>
+      <DiaryDispatchContext.Provider value={{onCreated,onUpdate,onDelete}}>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/new' element={<New/>}/>

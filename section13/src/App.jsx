@@ -27,6 +27,12 @@ const mockData = [
     emotionId: 3,    
     content: "3번 일기 내용", 
   }, 
+  { 
+    id: 4, 
+    createdDate: new Date(2026,1,1), 
+    emotionId: 4,    
+    content: "4번 일기 내용", 
+  }, 
 ]; 
 
 // useReducer
@@ -54,7 +60,7 @@ function reducer(state,action){
 function App() {
   // 이벤트 처리 onCreate, onUpdate, onDelete
   const [state, dispatch] = useReducer(reducer,mockData);
-  const idRef = useRef(3);
+  const idRef = useRef(5);
   
   const onCreate=(createdDate,emotionId,content)=>{
     dispatch({
