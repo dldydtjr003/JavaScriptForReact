@@ -38,7 +38,7 @@ function reducer(state, action){
       
     case "UPDATE":
       return state.map((item)=>
-        item.id === action.id ? action.data : item
+        Number(item.id) === Number(action.data.id) ? action.data : item
       )
       
     case "DELETE":
