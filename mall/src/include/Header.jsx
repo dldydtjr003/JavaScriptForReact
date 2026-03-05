@@ -1,9 +1,10 @@
 import "./Header.css";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 export default function Header() {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
-  const toggleDropDown = (e) => {
+  const toggleDropDown = () => {
     setIsDropDownOpen(!isDropDownOpen);
   };
   return (
@@ -11,12 +12,12 @@ export default function Header() {
       <nav className="custom-navbar">
         <div className="nav-container">
           <div className="nav-left">
-            <a href="/" className="nav-link">
+            <Link title="MAIN" to="/" className="nav-link">
               MAIN
-            </a>
-            <a href="/about" className="nav-link">
+            </Link>
+            <Link title="ABOUT" to="/about" className="nav-link">
               ABOUT
-            </a>
+            </Link>
 
             {/* 드롭다운 영역 */}
             <div className="nav-dropdown">
@@ -27,23 +28,39 @@ export default function Header() {
               {isDropDownOpen && (
                 <ul className="dropdown-menu">
                   <li>
-                    <a href="/todo/list">LIST</a>
+                    <Link to="/todo/list" className="nav-link">
+                      LIST
+                    </Link>
                   </li>
                   <li>
-                    <a href="/todo/add">ADD</a>
+                    <Link to="/todo/add" className="nav-link">
+                      ADD
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/todo/read/20" className="nav-link">
+                      READ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/todo/modify" className="nav-link">
+                      MODIFY
+                    </Link>
                   </li>
                   <li className="divider"></li>
                   <li>
-                    <a href="#">예비용</a>
+                    <Link to="#" className="nav-link">
+                      예비용
+                    </Link>
                   </li>
                 </ul>
               )}
             </div>
           </div>
           <div className="nav-right">
-            <a href="#" className="nav-link">
+            <Link to="/member/login" className="nav-link">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

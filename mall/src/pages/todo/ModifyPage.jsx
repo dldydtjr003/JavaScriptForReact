@@ -1,18 +1,18 @@
-import Header from "../include/header";
-import "./MainPage.css";
-import { Link } from "react-router-dom";
+import Header from "../../include/header";
+import { useParams } from "react-router-dom";
+import "./ReadPage.css";
 
-const MainPage = () => {
+const ModifyPage = () => {
+  const { tno } = useParams();
   return (
     <>
       <div className="main-container">
         <Header />
-        <Link to={"/todo/list?page=3&size=20"}>List Page</Link>
-
+        <p>Modify Page tno = {tno}</p>
         <main className="content-area">
           <div className="button-wrapper">
             <button type="button" className="custom-btn-outline">
-              Main Page
+              Todo Modify Page
             </button>
           </div>
         </main>
@@ -20,4 +20,4 @@ const MainPage = () => {
     </>
   );
 };
-export default MainPage;
+export default ModifyPage;
