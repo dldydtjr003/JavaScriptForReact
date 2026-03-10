@@ -1,0 +1,64 @@
+import { useState } from "react";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+
+// "5" 존재하면 5 return, "" 없으면 defaultValue return하는 화살표 함수
+const getNum = (param, defaultValue) => {
+  if (!param) {
+    return defaultValue;
+  }
+  return parseInt(param);
+};
+const useCustomMove = () => {
+  // <a>
+  const navigate = useNavigate();
+
+  // const queryDefault = ?page=2&size=10
+  const [queryParams] = useSearchParams();
+  const page = getNum(queryParams.get("page"), 1);
+  const size = getNum(queryParams.get("size"), 10);
+  const queryDefault = createSearchParams({ page, size }).toString(); //새로 추가
+
+  // http://localhost:5173/todo/list?page=1&size=10
+  const moveToList = (pageParam) => {
+    let queryStr = "";
+    if (pageParam) {
+      const pageNum = getNum(pageParam.page, page);
+      const sizeNum = getNum(pageParam.size, size);
+      queryStr = createSearchParams({
+        page: pageNum,
+        size: sizeNum,
+      }).toString();
+    } else {
+      queryStr = queryDefault;
+    }
+
+    navigate({
+      pathname: `../todo/list`,
+      search: queryStr,
+    });
+  };
+
+  // http://localhost:5173/todo/modify/10?page=1&size=10
+  const moveToModify = (num) => {
+    console.log(queryDefault);
+    navigate({
+      pathname: `../todo/modify/${num}`,
+      search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
+    });
+  };
+
+  // http://localhost:5173/todo/read/10?page=1&size=10
+  const moveToRead = (num) => {
+    navigate({
+      pathname: `../todo/read/${num}`,
+      search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
+    });
+  };
+  return { moveToList, moveToModify, moveToRead, page, size }; //moveToModify 추가
+};
+
+export default useCustomMove;

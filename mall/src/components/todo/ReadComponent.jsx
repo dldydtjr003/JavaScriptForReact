@@ -9,8 +9,9 @@ const initState = {
   dueDate: null,
   complete: false,
 };
-const ReadComponent = ({ tno }) => {
+const ReadComponent = ({ tno, moveToList, moveToModify }) => {
   const [todo, setTodo] = useState(initState); // 아직 todo는 사용하지 않음
+
   // 마운트 기능
   useEffect(() => {
     getOne(tno).then((data) => {
@@ -30,6 +31,23 @@ const ReadComponent = ({ tno }) => {
           title="Complete"
           value={todo.complete ? "Completed" : "Not Yet"}
         />
+      </div>
+
+      <div className="button-group">
+        <button
+          className="custom-btn btn-modify"
+          type="button"
+          onClick={() => moveToModify(tno)}
+        >
+          수정하기
+        </button>
+        <button
+          className="custom-btn btn-list"
+          type="button"
+          onClick={() => moveToList()}
+        >
+          목록가기
+        </button>
       </div>
     </div>
   );
