@@ -38,7 +38,7 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/todo/read/20" className="nav-link">
+                    <Link to="/todo/read/260" className="nav-link">
                       READ
                     </Link>
                   </li>

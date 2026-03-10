@@ -1,0 +1,34 @@
+/* ReadComponent.css */
+.read-container {
+  border: 2px solid #bae6fd; /* sky-200 색상 */
+  margin-top: 2.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+}
+
+.read-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.read-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.read-label {
+  width: 20%;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f8fafc; /* 부드러운 배경색 추가 */
+}
+.read-value {
+  width: 80%;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0 4px 4px 0;
+}
