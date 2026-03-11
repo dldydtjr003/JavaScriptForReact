@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getList } from "../../api/todoApi";
 import useCustomMove from "../../hooks/useCustomMove";
+import PageComponent from "../common/PageComponent";
 import "./ListComponent.css";
 
 const initState = {
@@ -17,14 +18,16 @@ const initState = {
 };
 
 const ListComponent = () => {
-  const { page, size, moveToRead } = useCustomMove();
+  const { page, size, refresh, moveToRead, moveToList } = useCustomMove();
   const [serverData, setServerData] = useState(initState);
+
   useEffect(() => {
     getList({ page, size }).then((data) => {
       console.log(data);
       setServerData(data);
     });
-  }, [page, size]);
+  }, [page, size, refresh]);
+
   return (
     <div className="list-container">
       <table className="todo-table">
@@ -46,6 +49,7 @@ const ListComponent = () => {
           ))}
         </tbody>
       </table>
+      <PageComponent serverData={serverData} moveToList={moveToList} />
     </div>
   );
 };

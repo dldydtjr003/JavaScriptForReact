@@ -13,8 +13,8 @@ const getNum = (param, defaultValue) => {
   return parseInt(param);
 };
 const useCustomMove = () => {
-  // <a>
   const navigate = useNavigate();
+  const [refresh, setrefresh] = useState(false);
 
   // const queryDefault = ?page=2&size=10
   const [queryParams] = useSearchParams();
@@ -35,11 +35,12 @@ const useCustomMove = () => {
     } else {
       queryStr = queryDefault;
     }
-
+    // "/todo/list?page=1&size=10"
     navigate({
       pathname: `../todo/list`,
       search: queryStr,
     });
+    setrefresh(!refresh);
   };
 
   // http://localhost:5173/todo/modify/10?page=1&size=10
@@ -58,7 +59,7 @@ const useCustomMove = () => {
       search: queryDefault, //수정시에 기존의 쿼리 스트링 유지를 위해
     });
   };
-  return { moveToList, moveToModify, moveToRead, page, size }; //moveToModify 추가
+  return { moveToList, moveToModify, moveToRead, page, size, refresh }; //moveToModify 추가
 };
 
 export default useCustomMove;
