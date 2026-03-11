@@ -15,3 +15,8 @@ export const getList = async (pageParam) => {
   });
   return res.data;
 };
+// http://localhost:8080/api/todo/
+export const postAdd = async (todoObj) => {
+  const res = await axios.post(`${prefix}/`, todoObj);
+  return res.data;
+};

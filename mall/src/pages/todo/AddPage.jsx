@@ -1,4 +1,5 @@
-import Header from "../../include/header";
+import Header from "../../include/Header";
+import AddComponent from "../../components/todo/AddComponent";
 import "./AddPage.css";
 
 const AddPage = () => {
@@ -6,15 +7,15 @@ const AddPage = () => {
     <>
       <div className="main-container">
         <Header />
-        <main className="content-area">
-          <div className="button-wrapper">
-            <button type="button" className="custom-btn-outline">
-              Todo Add Page
-            </button>
+        <main className="list-content-area">
+          <div className="list-wrapper">
+            {/* 실제 데이터 목록이 표시되는 컴포넌트 */}
+            <AddComponent />
           </div>
         </main>
       </div>
     </>
   );
 };
+
 export default AddPage;
