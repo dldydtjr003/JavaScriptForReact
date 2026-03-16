@@ -6,10 +6,18 @@ import Loading from "../pages/Loading";
 const MainPage = lazy(() => import("../pages/MainPage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
+
+// -------------------------------Todo----------------------------------
 const ListPage = lazy(() => import("../pages/todo/ListPage"));
 const ReadPage = lazy(() => import("../pages/todo/ReadPage"));
 const AddPage = lazy(() => import("../pages/todo/AddPage"));
 const ModifyPage = lazy(() => import("../pages/todo/ModifyPage"));
+
+// -------------------------------product----------------------------------
+const ProductListPage = lazy(() => import("../pages/product/ListPage"));
+const ProductAddPage = lazy(() => import("../pages/product/AddPage"));
+const ProductReadPage = lazy(() => import("../pages/product/ReadPage"));
+const ProductModifyPage = lazy(() => import("../pages/product/ModifyPage"));
 
 const Root = createBrowserRouter([
   {
@@ -36,6 +44,7 @@ const Root = createBrowserRouter([
       </Suspense>
     ),
   },
+  // -------------------------------Todo----------------------------------
   {
     path: "/todo/list",
     element: (
@@ -65,6 +74,39 @@ const Root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <ModifyPage />
+      </Suspense>
+    ),
+  },
+  // -------------------------------product----------------------------------
+  {
+    path: "/product/list",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductListPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/read/:pno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductReadPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/add",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductAddPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/product/modify/:pno",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <ProductModifyPage />
       </Suspense>
     ),
   },
