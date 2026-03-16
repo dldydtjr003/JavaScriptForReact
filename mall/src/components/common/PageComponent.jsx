@@ -1,6 +1,6 @@
 import "./PageComponent.css"; // CSS 파일 임포트
 
-const PageComponent = ({ serverData, moveToList }) => {
+const PageComponent = ({ serverData, moveToProductList }) => {
   return (
     <div className="pagination-container">
       <ul className="pagination-list">
@@ -8,7 +8,7 @@ const PageComponent = ({ serverData, moveToList }) => {
         {serverData.prev && (
           <li
             className="page-item page-nav"
-            onClick={() => moveToList({ page: serverData.prevPage })}
+            onClick={() => moveToProductList({ page: serverData.prevPage })}
           >
             &lt;
           </li>
@@ -19,7 +19,7 @@ const PageComponent = ({ serverData, moveToList }) => {
           <li
             key={pageNum}
             className={`page-item ${serverData.current === pageNum ? "active" : ""}`}
-            onClick={() => moveToList({ page: pageNum })}
+            onClick={() => moveToProductList({ page: pageNum })}
           >
             {pageNum}
           </li>
@@ -29,7 +29,7 @@ const PageComponent = ({ serverData, moveToList }) => {
         {serverData.next && (
           <li
             className="page-item page-nav"
-            onClick={() => moveToList({ page: serverData.nextPage })}
+            onClick={() => moveToProductList({ page: serverData.nextPage })}
           >
             &gt;
           </li>

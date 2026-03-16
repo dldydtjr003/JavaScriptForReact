@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
 import { postAdd } from "../../api/productsApi";
+import FetchingModal from "../common/FetchingModal";
+import InfoModal from "../common/InfoModal";
+import useCustomMove from "../../hooks/useCustomMove";
 import "./AddComponent.css"; // CSS 파일 임포트
 
 const initState = {
@@ -11,6 +14,10 @@ const initState = {
 
 export default function AddComponent() {
   const [product, setProduct] = useState({ ...initState });
+  const [fetching, setFetching] = useState(false);
+  const [infoModalOn, setInfoModalOn] = useState(false);
+  const [result, setResult] = useState();
+  const { moveToProductList } = useCustomMove();
   // 파일 위치
   const uploadRef = useRef();
   // 입력값을 product 객체 수정진행
@@ -38,11 +45,28 @@ export default function AddComponent() {
     console.log(formData);
 
     // API 호출진행하고 서버에 전송
-    postAdd(formData);
+    setFetching(true);
+    postAdd(formData).then((data) => {
+      setFetching(false);
+      setInfoModalOn(true);
+      setResult(data.result);
+    });
+  };
+
+  const closeModal = () => {
+    setInfoModalOn(false);
+    moveToProductList({ page: 1 });
   };
 
   return (
     <div className="add-container">
+      {fetching ? <FetchingModal /> : <></>}
+      <InfoModal
+        show={infoModalOn}
+        title={`Product ADD RESULT`}
+        content={`New ${result} Added`}
+        callbackFn={closeModal}
+      />
       <div className="form-wrapper">
         {/* 상품명 입력 */}
         <div className="form-group">
