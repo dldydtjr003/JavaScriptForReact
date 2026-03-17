@@ -102,118 +102,102 @@ const ModifyComponent = ({ pno }) => {
 
       <InfoModal
         show={infoModalOn}
-        title={`result`}
+        title={`RESULT`}
         content={`${result}`}
         callbackFn={closeModal}
       />
-
       <div className="modify-form">
         <div className="modify-form-group">
-          <label className="modify-label">PNO</label>
+          <label className="modify-label">PNAME</label>
           <input
             className="modify-control"
             name="pname"
             type="text"
-            value={product.pno}
-            readOnly={true}
+            value={product.pname}
+            onChange={handleChangeProduct}
           />
-          <div className="modify-form-group">
-            <label className="modify-label">PNAME</label>
-            <input
-              className="modify-control"
-              name="pname"
-              type="text"
-              value={product.pname}
-              onChange={handleChangeProduct}
-            />
+        </div>
+        <div className="modify-form-group">
+          <label className="modify-label">PRICE</label>
+          <input
+            className="modify-control"
+            name="price"
+            type="number"
+            value={product.price}
+            onChange={handleChangeProduct}
+          />
+        </div>
+        <div className="modify-form-group">
+          <label className="modify-label">DESCRIPTION</label>
+          <textarea
+            className="modify-control"
+            name="pdesc"
+            rows={5}
+            value={product.pdesc}
+            onChange={handleChangeProduct}
+          />
+        </div>{" "}
+        <div className="modify-form-group">
+          <label className="modify-label">DELETE (Flag)</label>
+          <select
+            className="modify-select"
+            name="delFlag"
+            value={product.delFlag}
+            onChange={handleChangeProduct}
+          >
+            <option value={false}>사용 (Keep)</option>
+            <option value={true}>삭제 (Delete)</option>
+          </select>
+        </div>
+        <div className="modify-form-group">
+          <label className="modify-label">New Files</label>
+          <input
+            className="modify-control"
+            ref={uploadRef}
+            type="file"
+            multiple={true}
+          />
+        </div>
+      </div>
 
-            <label className="modify-label">PRICE</label>
-            <input
-              className="modify-control"
-              name="price"
-              type="number"
-              value={product.price}
-              onChange={handleChangeProduct}
-            />
-          </div>
-
-          <div className="modify-form-group">
-            <label className="modify-label">DESCRIPTION</label>
-            <textarea
-              className="modify-control"
-              name="pdesc"
-              rows={5}
-              value={product.pdesc}
-              onChange={handleChangeProduct}
-            />{" "}
-          </div>
-
-          <div className="modify-form-group">
-            <label className="modify-label">DELETE (Flag)</label>
-            <select
-              className="modify-select"
-              name="delFlag"
-              value={product.delFlag}
-              onChange={handleChangeProduct}
+      {/* 기존 이미지 목록 */}
+      <div className="modify-image-grid">
+        {product.uploadFileNames.map((imgFile, i) => (
+          <div className="modify-image-card" key={i}>
+            <button
+              className="btn-img-delete"
+              type="button"
+              onClick={() => deleteOldImages(imgFile)}
             >
-              <option value={false}>사용 (Keep)</option>
-              <option value={true}>삭제 (Delete)</option>
-            </select>
+              DELETE
+            </button>
+            <img alt="product" src={`${host}/api/products/view/s_${imgFile}`} />
           </div>
+        ))}
+      </div>
 
-          <div className="modify-form-group">
-            <label className="modify-label">New Files</label>
-            <input
-              className="modify-control"
-              ref={uploadRef}
-              type="file"
-              multiple={true}
-            />
-          </div>
-        </div>
-
-        {/* 기존 이미지 목록 */}
-        <div className="modify-image-grid">
-          {product.uploadFileNames.map((imgFile, i) => (
-            <div className="modify-image-card" key={i}>
-              <button
-                className="btn-img-delete"
-                type="button"
-                onClick={() => deleteOldImages(imgFile)}
-              >
-                DELETE
-              </button>
-              <img
-                alt="product"
-                src={`${host}/api/products/view/s_${imgFile}`}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="modify-button-group">
-          <button
-            className="btn-modify-action btn-del"
-            type="button"
-            onClick={handleClickDelete}
-          >
-            DELETE
-          </button>
-          <button
-            className="btn-modify-action btn-mod"
-            type="button"
-            onClick={handleClickModify}
-          >
-            MODIFY{" "}
-          </button>
-          <button
-            className="btn-modify-action btn-list"
-            type="button"
-            onClick={moveToProductList}
-          >
-            LIST
-          </button>
-        </div>
+      <div className="modify-button-group">
+        <button
+          className="btn-modify-action btn-del"
+          type="button"
+          onClick={handleClickDelete}
+        >
+          DELETE
+        </button>
+        <button
+          className="btn-modify-action btn-mod"
+          type="button"
+          onClick={handleClickModify}
+        >
+          MODIFY
+        </button>
+        <button
+          className="btn-modify-action btn-list"
+          type="button"
+          onClick={moveToProductList}
+        >
+          LIST
+        </button>
       </div>
     </div>
   );
