@@ -5,7 +5,6 @@ import Loading from "../pages/Loading";
 // Router(Controller 대상이 되는 페이지를 가져와야 한다.)
 const MainPage = lazy(() => import("../pages/MainPage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
-const LoginPage = lazy(() => import("../pages/LoginPage"));
 
 // -------------------------------Todo----------------------------------
 const ListPage = lazy(() => import("../pages/todo/ListPage"));
@@ -18,6 +17,10 @@ const ProductListPage = lazy(() => import("../pages/product/ListPage"));
 const ProductAddPage = lazy(() => import("../pages/product/AddPage"));
 const ProductReadPage = lazy(() => import("../pages/product/ReadPage"));
 const ProductModifyPage = lazy(() => import("../pages/product/ModifyPage"));
+
+// -------------------------------member----------------------------------
+const LoginPage = lazy(() => import("../pages/member/LoginPage"));
+const LogoutPage = lazy(() => import("../pages/member/LogoutPage"));
 
 const Root = createBrowserRouter([
   {
@@ -33,14 +36,6 @@ const Root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <AboutPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/member/login",
-    element: (
-      <Suspense fallback={<Loading />}>
-        <LoginPage />
       </Suspense>
     ),
   },
@@ -107,6 +102,23 @@ const Root = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <ProductModifyPage />
+      </Suspense>
+    ),
+  },
+  // -------------------------------member----------------------------------
+  {
+    path: "/member/login",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <LoginPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/member/logout",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <LogoutPage />
       </Suspense>
     ),
   },
