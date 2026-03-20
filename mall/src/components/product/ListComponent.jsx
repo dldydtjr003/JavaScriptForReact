@@ -4,6 +4,7 @@ import useCustomMove from "../../hooks/useCustomMove";
 import FetchingModal from "../common/FetchingModal";
 import { API_SERVER_HOST } from "../../api/todoApi";
 import PageComponent from "../common/PageComponent";
+import useCustomLogin from "../../hooks/useCustomLogin";
 import "./ListComponent.css";
 
 const host = API_SERVER_HOST;
@@ -27,6 +28,7 @@ const ListComponent = () => {
   const [serverData, setServerData] = useState(initState);
   // 상태 선언이 반드시 useEffect보다 위에 있어야 합니다.
   const [fetching, setFetching] = useState(false);
+  const { exceptionHandle } = useCustomLogin();
 
   // API 서버로부터 데이터 로딩
   useEffect(() => {
@@ -44,9 +46,10 @@ const ListComponent = () => {
         // 에러 발생 시에도 로딩은 꺼줘야 하므로 예외 처리를 권장합니다.
         setFetching(false);
         console.error(err);
+        exceptionHandle(err);
       });
     clearTimeout(timer);
-  }, [page, size, refresh]);
+  }, [page, size, refresh, exceptionHandle]);
 
   return (
     <div className="list-container">

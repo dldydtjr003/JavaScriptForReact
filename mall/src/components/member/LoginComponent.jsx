@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useCustomLogin from "../../hooks/useCustomLogin";
+import KakaoLoginComponent from "./KakaoLoginComponent";
 import "./LoginComponent.css"; // CSS 분리
 
 const initState = {
@@ -75,6 +76,7 @@ export default function LoginComponent() {
           로그인
         </button>
       </div>
+      <KakaoLoginComponent />
     </div>
   );
 }

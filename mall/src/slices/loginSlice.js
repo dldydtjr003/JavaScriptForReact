@@ -1,9 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginPost } from "../api/memberApi";
-import { setCookie } from "../util/CookieUtil";
+import { getCookie, setCookie, removeCookie } from "../util/CookieUtil";
 
 const initState = {
   email: "",
+};
+
+const loadMemberCookie = () => {
+  const memberInfo = getCookie("member");
+  if (memberInfo && memberInfo.nickname) {
+    memberInfo.nickname = decodeURIComponent(memberInfo.nickname);
+  }
+  return memberInfo;
 };
 
 export const loginPostAsync = createAsyncThunk("loginPostAsync", (param) => {
@@ -12,14 +20,16 @@ export const loginPostAsync = createAsyncThunk("loginPostAsync", (param) => {
 
 const loginSlice = createSlice({
   name: "LoginSlice",
-  initialState: initState,
+  initialState: loadMemberCookie() || initState,
   reducers: {
     login: (state, action) => {
       const data = action.payload;
       console.log("로그인 금고지기" + data.email + "  " + data.pw);
-      return { email: data.email };
+      setCookie("member", JSON.stringify(data), 1);
+      return data;
     },
     logout: (state, action) => {
+      removeCookie("member");
       return { ...initState };
     },
   },
